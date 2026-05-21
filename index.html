@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMINIK RAINER /// PORTFOLIO</title>
+    <meta name="description" content="Dominik Rainer — Portfolio">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0c0e;
+            --surface: #111416;
+            --card: #181b1e;
+            --border: #1e2226;
+            --text: #c8d0d8;
+            --text-dim: #6a727a;
+            --accent: #2d8f5c;
+            --accent-dim: rgba(45,143,92,0.1);
+            --accent-glow: rgba(45,143,92,0.06);
+            --cyan: #3da88a;
+            --radius: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ===== SCANLINE ===== */
+        body::after {
+            content: '';
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10,12,14,0.95);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            height: 56px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem; font-weight: 600;
+            color: var(--accent);
+        }
+        .nav-logo span { color: var(--text-dim); }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.75rem; font-weight: 500;
+            padding: 6px 14px;
+            border: 1px solid transparent;
+            transition: 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .nav-links a:hover {
+            color: var(--text);
+            border-color: var(--border);
+        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+        .hamburger span { width: 22px; height: 2px; background: var(--text); }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 160px 24px 80px;
+            max-width: 1200px; margin: 0 auto;
+            position: relative;
+        }
+        .hero::before {
+            content: '///';
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12rem; font-weight: 700;
+            color: var(--accent-glow);
+            position: absolute; top: 40px; right: 24px;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .hero-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem; font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 24px;
+            padding: 4px 12px;
+            border: 1px solid var(--accent-dim);
+            display: inline-block;
+        }
+        .hero h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        .hero h1 .accent { color: var(--accent); }
+        .hero h1 .dim { color: var(--text-dim); }
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-dim);
+            max-width: 550px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+        .hero-links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+        .hero-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 20px;
+            font-size: 0.75rem; font-weight: 500;
+            text-decoration: none; text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            transition: 0.15s;
+        }
+        .hero-links a:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+        .hero-links a.primary {
+            background: var(--accent);
+            color: #0a0c0e;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+        .hero-links a.primary:hover {
+            opacity: 0.9;
+            background: var(--accent);
+            color: #0a0c0e;
+        }
+
+        .hero-stats {
+            display: flex; gap: 32px;
+            padding: 24px 0 0;
+            border-top: 1px solid var(--border);
+        }
+        .stat-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2rem; font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+        }
+        .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 80px 24px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-header { margin-bottom: 48px; display: flex; align-items: center; gap: 20px; }
+        .section-header .num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem; font-weight: 600;
+            color: var(--accent);
+            padding: 4px 10px;
+            border: 1px solid var(--accent-dim);
+        }
+        .section-header h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.3rem; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .section-header p { color: var(--text-dim); font-size: 0.85rem; max-width: 400px; margin-left: auto; text-align: right; }
+
+        /* ===== PROJECTS ===== */
+        .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .proj-card {
+            padding: 28px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            transition: 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-card::after {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            transition: 0.3s;
+        }
+        .proj-card:nth-child(1)::after { background: var(--accent); }
+        .proj-card:nth-child(2)::after { background: var(--cyan); }
+        .proj-card:nth-child(3)::after { background: var(--accent); }
+        .proj-card:nth-child(4)::after { background: #666; }
+        .proj-card:nth-child(5)::after { background: var(--cyan); }
+        .proj-card:nth-child(6)::after { background: #888; }
+        .proj-card:hover { border-color: #2a3036; }
+        .proj-card .tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem; font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .proj-card h3 { font-size: 1rem; font-weight: 600; }
+        .proj-card .meta { font-size: 0.75rem; color: var(--text-dim); margin: 2px 0 10px; }
+        .proj-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+        .proj-card .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 12px; }
+        .proj-card .tags span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem; font-weight: 500;
+            padding: 2px 8px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .proj-card a { 
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accent); text-decoration: none;
+            font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px; margin-top: 12px;
+        }
+        .proj-card a:hover { text-decoration: underline; }
+        .offline-flag { font-size: 0.55rem; color: var(--text-dim); margin-left: 6px; letter-spacing: 0.1em; }
+
+        /* ===== TIMELINE ===== */
+        .tl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; counter-reset: tl; }
+        .tl-item {
+            padding: 24px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            counter-increment: tl;
+        }
+        .tl-item::before {
+            content: "0" counter(tl);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem; font-weight: 600;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .tl-item h3 { font-size: 0.95rem; font-weight: 600; }
+        .tl-item .sub { font-size: 0.75rem; color: var(--text-dim); font-weight: 500; }
+        .tl-item .tl-date { 
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem; color: var(--accent); font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .tl-item p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; margin-top: 6px; }
+        .abbr {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.55rem; font-weight: 600;
+            color: var(--text-dim); border: 1px solid var(--border);
+            padding: 2px 6px; margin-top: 6px; display: inline-block;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-cat {
+            padding: 20px 24px;
+            border: 1px solid var(--border);
+            flex: 1; min-width: 180px;
+            background: var(--card);
+        }
+        .skill-cat h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .skill-cat .s { display: flex; flex-wrap: wrap; gap: 4px; }
+        .skill-cat .s span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section { border-top: 1px solid var(--border); padding: 80px 24px; text-align: center; }
+        .contact-section h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.3rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .contact-section p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 28px; }
+        .contact-links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .contact-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 20px; font-size: 0.75rem; font-weight: 500;
+            text-decoration: none; text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border); color: var(--text-dim);
+            transition: 0.15s;
+        }
+        .contact-links a:hover { border-color: var(--accent); color: var(--text); background: var(--accent-dim); }
+
+        footer { text-align: center; padding: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--text-dim); border-top: 1px solid var(--border); }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .fade.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed; top: 56px; left: 0; right: 0;
+                background: rgba(10,12,14,0.98); flex-direction: column;
+                padding: 24px; gap: 8px;
+                transform: translateY(-120%); transition: 0.3s;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links.open { transform: translateY(0); }
+            .hamburger { display: flex; }
+            .proj-grid { grid-template-columns: 1fr; }
+            .tl { grid-template-columns: 1fr; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .section-header p { text-align: left; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .hero::before { font-size: 5rem; top: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <span class="nav-logo">DR<span>//</span></span>
+        <ul class="nav-links" id="nl3">
+            <li><a href="#projekte">Projekte</a></li>
+            <li><a href="#werdegang">Werdegang</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="hamburger" onclick="document.getElementById('nl3').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div>
+        <div class="hero-badge">Full-Stack Developer /// Innsbruck</div>
+        <h1>
+            <span class="dim">Dominik</span><br>
+            <span class="accent">Rainer</span>
+        </h1>
+        <p>
+            SaaS-Plattformen, KI-Tools, Live-Streaming, Portale und Print.
+            Kein Bock auf langweiligen Standard — ich baue Sachen die laufen.
+        </p>
+        <div class="hero-links">
+            <a href="mailto:rainer@dominik.in" class="primary">✉ Kontakt</a>
+            <a href="https://github.com/Loggableim" target="_blank">$ github</a>
+            <a href="#werdegang">↓ Werdegang</a>
+        </div>
+        <div class="hero-stats">
+            <div><div class="stat-number">06</div><div class="stat-label">Projekte</div></div>
+            <div><div class="stat-number">04</div><div class="stat-label">Brands</div></div>
+            <div><div class="stat-number">2.3k</div><div class="stat-label">Tests</div></div>
+            <div><div class="stat-number">10+</div><div class="stat-label">Jahre Dev</div></div>
+        </div>
+    </div>
+</section>
+
+<section id="projekte">
+    <div class="section-inner">
+        <div class="section-header fade">
+            <span class="num">01</span>
+            <h2>Projekte</h2>
+            <p>Gebaut mit Node.js, Python, Blut & Schweiß</p>
+        </div>
+        <div class="proj-grid">
+            <div class="proj-card fade">
+                <div class="tag">SaaS</div>
+                <h3>WordStructor</h3>
+                <div class="meta">4 Brands · Buchgenerierung</div>
+                <p>Python/Flet Desktop-App mit Dodo Payments, HWID-Lizenzsystem, lokal & Cloud-KI.</p>
+                <div class="tags"><span>Python</span><span>Flet</span><span>LLM</span><span>Dodo</span></div>
+                <a href="https://wordstructor.com">wordstructor.com →</a>
+            </div>
+            <div class="proj-card fade">
+                <div class="tag">Tool</div>
+                <h3>LTTH.app</h3>
+                <div class="meta">TikTok LIVE Streaming</div>
+                <p>37 Plugins, OBS-Overlays, 2.391 Tests. Node.js + Socket.IO + OpenAI.</p>
+                <div class="tags"><span>Node.js</span><span>Socket.IO</span><span>TikTok</span></div>
+                <a href="https://ltth.app">ltth.app →</a>
+            </div>
+            <div class="proj-card fade">
+                <div class="tag">Web</div>
+                <h3>TIROL Tourismus</h3>
+                <div class="meta">4 Sprachen · Cloudflare</div>
+                <p>Astro SSG, DE/FR/IT/EN, Newsletter, Karten, Übersetzungs-Agenten.</p>
+                <div class="tags"><span>Astro</span><span>Cloudflare</span><span>i18n</span></div>
+                <a href="https://tiroltourismus.com">tiroltourismus.com →</a>
+            </div>
+            <div class="proj-card fade">
+                <div class="tag">Shop</div>
+                <h3>AquaristikZentrum <span class="offline-flag">[OFFLINE]</span></h3>
+                <div class="meta">E-Commerce · Full-Stack</div>
+                <p>Führender Aquaristik-Shop DACH. Shop-Dev, Performance, Facebook-Admin.</p>
+                <div class="tags"><span>E-Commerce</span><span>Full-Stack</span></div>
+            </div>
+            <div class="proj-card fade">
+                <div class="tag">Print</div>
+                <h3>Pixel Project</h3>
+                <div class="meta">Nyala SwissQprint</div>
+                <p>Digitaldruck. SwissQprint Bedienung, Farbmanagement, Produktion.</p>
+                <div class="tags"><span>SwissQprint</span><span>Druck</span></div>
+            </div>
+            <div class="proj-card fade">
+                <div class="tag">Data</div>
+                <h3>Poker GTO-Tools</h3>
+                <div class="meta">Self-Play AI · Analyse</div>
+                <p>16 Szenarien, Range-Heatmaps, Leak-Erkennung. Bildungszwecke.</p>
+                <div class="tags"><span>Python</span><span>Data</span><span>SQLite</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="werdegang">
+    <div class="section-inner">
+        <div class="section-header fade">
+            <span class="num">02</span>
+            <h2>Werdegang</h2>
+            <p>Lebenslauf in kurz — Trial &amp; Error inklusive</p>
+        </div>
+        <div class="tl">
+            <div class="tl-item fade">
+                <div class="tl-date">~2012</div>
+                <h3>Koch-Ausbildung</h3>
+                <div class="sub">nicht abgeschlossen</div>
+                <p>Erste Station. Küche, Organisation, Disziplin.</p>
+                <span class="abbr">abgebrochen</span>
+            </div>
+            <div class="tl-item fade">
+                <div class="tl-date">~2014</div>
+                <h3>Medienfachmann</h3>
+                <div class="sub">nicht abgeschlossen</div>
+                <p>Einstieg in Web &amp; digitale Medien.</p>
+                <span class="abbr">abgebrochen</span>
+            </div>
+            <div class="tl-item fade">
+                <div class="tl-date">2014–2017</div>
+                <h3>Freelance &amp; erste Webprojekte</h3>
+                <div class="sub">Freelancer, Fiverr, Crypto</div>
+                <p>Bitcoin, Dogecoin-Wallets, PHP/HTML.</p>
+            </div>
+            <div class="tl-item fade">
+                <div class="tl-date">2017–2021</div>
+                <h3>Web-Dev &amp; Facebook-Apps</h3>
+                <div class="sub">Kappalounge, neunGAG</div>
+                <p>Facebook-Apps, Node.js, Python.</p>
+            </div>
+            <div class="tl-item fade">
+                <div class="tl-date">2021–2022</div>
+                <h3>Pixel Project</h3>
+                <div class="sub">SwissQprint · Digitaldruck</div>
+                <p>Großformat-Druckproduktion.</p>
+            </div>
+            <div class="tl-item fade">
+                <div class="tl-date">2022–2024</div>
+                <h3>AquaristikZentrum</h3>
+                <div class="sub">Full-Stack Webdev</div>
+                <p>Größter Aquaristik-Shop. Mittlerweile offline.</p>
+            </div>
+            <div class="tl-item fade" style="grid-column:1/-1">
+                <div class="tl-date">2024–heute</div>
+                <h3>Solo-Gründer</h3>
+                <div class="sub">WordStructor · LTTH · TIROL · Poker</div>
+                <p>Full Ownership. Alles selbst gemacht.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="section-inner">
+        <div class="section-header fade">
+            <span class="num">03</span>
+            <h2>Skills</h2>
+            <p>Tech-Stack aus &gt;10 Jahren Production</p>
+        </div>
+        <div class="skills">
+            <div class="skill-cat fade"><h3>Backend</h3><div class="s"><span>Node.js</span><span>Express</span><span>Socket.IO</span><span>Python</span><span>Flask</span><span>SQLite</span></div></div>
+            <div class="skill-cat fade"><h3>Frontend</h3><div class="s"><span>HTML/CSS</span><span>JS</span><span>Astro</span><span>Tailwind</span><span>GSAP</span><span>Flet</span></div></div>
+            <div class="skill-cat fade"><h3>AI</h3><div class="s"><span>Agents</span><span>LLM</span><span>OpenAI</span><span>DeepSeek</span><span>Self-Play</span></div></div>
+            <div class="skill-cat fade"><h3>DevOps</h3><div class="s"><span>Git</span><span>CI/CD</span><span>Cloudflare</span><span>Docker</span><span>Nginx</span></div></div>
+            <div class="skill-cat fade"><h3>Payments</h3><div class="s"><span>Dodo</span><span>Licenses</span><span>HWID</span><span>Resend</span></div></div>
+            <div class="skill-cat fade"><h3>Print</h3><div class="s"><span>SwissQprint</span><span>Digitaldruck</span><span>SEO</span><span>i18n</span></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-section" id="kontakt">
+    <h2 class="fade">Kontakt</h2>
+    <p class="fade">Mail, Web oder GitHub — Hauptsache kein LinkedIn.</p>
+    <div class="contact-links fade">
+        <a href="mailto:rainer@dominik.in">✉ rainer@dominik.in</a>
+        <a href="https://dominik.in" target="_blank">🌐 dominik.in</a>
+        <a href="https://github.com/Loggableim" target="_blank">🐙 GitHub</a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Dominik Rainer /// <a href="mailto:rainer@dominik.in">rainer@dominik.in</a></p>
+</footer>
+
+<script>
+    document.querySelectorAll('#nl3 a').forEach(a => a.addEventListener('click', () => document.getElementById('nl3').classList.remove('open')));
+    const o = new IntersectionObserver(e => { e.forEach(i => { if(i.isIntersecting) i.target.classList.add('visible') }) }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => o.observe(el));
+</script>
+</body>
+</html>
