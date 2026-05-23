@@ -166,7 +166,7 @@
         .stat-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; font-weight: 500; }
 
         /* ── Sections ── */
-        section { padding: 90px 24px; }
+        section { padding: 90px 24px; scroll-margin-top: 80px; }
         .section-inner { max-width: 1200px; margin: 0 auto; }
         .section-header { margin-bottom: 52px; display: flex; align-items: center; gap: 20px; }
         .section-header .num {
@@ -198,7 +198,7 @@
         .proj-card:nth-child(8)::after { background: var(--cyan); }
         .proj-card:hover { border-color: #333; background: #181d22; }
         .proj-card .tag {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600;
             color: var(--accent-bright); text-transform: uppercase;
             letter-spacing: 0.12em; margin-bottom: 10px;
         }
@@ -210,7 +210,7 @@
         .proj-card p { font-size: 0.85rem; color: #9aa3ae; line-height: 1.8; }
         .proj-card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
         .proj-card .tags span {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 500;
             padding: 4px 10px; border: 1px solid var(--border);
             color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;
         }
@@ -223,7 +223,7 @@
             content: ' ↗';
             font-size: 0.65rem;
         }
-        .offline-flag { font-size: 0.68rem; color: #888; margin-left: 6px; letter-spacing: 0.1em; }
+        .offline-flag { font-size: 0.7rem; color: #888; margin-left: 6px; letter-spacing: 0.1em; }
 
         /* ── Timeline ── */
         .tl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; counter-reset: tl; }
@@ -233,29 +233,29 @@
         }
         .tl-item::before {
             content: "0" counter(tl); font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem; font-weight: 600; color: #555; display: block; margin-bottom: 10px;
+            font-size: 0.68rem; font-weight: 600; color: #555; display: block; margin-bottom: 10px;
         }
         .tl-item h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
         .tl-item .sub { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; margin-top: 2px; }
-        .tl-item .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent-bright); font-weight: 600; margin-bottom: 6px; }
+        .tl-item .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--accent-bright); font-weight: 600; margin-bottom: 6px; }
         .tl-item p { font-size: 0.85rem; color: #9aa3ae; line-height: 1.8; margin-top: 8px; }
 
         /* ── Skills ── */
         .skills { display: flex; flex-wrap: wrap; gap: 10px; }
         .skill-cat { padding: 24px 28px; border: 1px solid var(--border); flex: 1; min-width: 200px; background: var(--card); }
-        .skill-cat h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-bright); margin-bottom: 14px; }
+        .skill-cat h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-bright); margin-bottom: 14px; }
         .skill-cat .s { display: flex; flex-wrap: wrap; gap: 6px; }
-        .skill-cat .s span { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; padding: 4px 10px; border: 1px solid var(--border); color: var(--text-dim); }
+        .skill-cat .s span { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; padding: 4px 10px; border: 1px solid var(--border); color: var(--text-dim); }
 
         /* ── Contact ── */
-        .contact-section { border-top: 1px solid var(--border); padding: 90px 24px; text-align: center; }
+        .contact-section { border-top: 1px solid var(--border); padding: 90px 24px; text-align: center; scroll-margin-top: 80px; }
         .contact-section h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1.4rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
         .contact-section p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 32px; }
         .contact-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .contact-links a { font-family: 'IBM Plex Mono', monospace; display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; font-size: 0.78rem; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); color: var(--text-dim); transition: 0.15s; min-height: 44px; }
         .contact-links a:hover { border-color: var(--accent); color: var(--text); background: var(--accent-dim); }
 
-        footer { text-align: center; padding: 28px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: #555; border-top: 1px solid var(--border); }
+        footer { text-align: center; padding: 28px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #555; border-top: 1px solid var(--border); }
         footer a { color: var(--accent); text-decoration: none; }
 
         /* ── Fade-in animation ── */
@@ -319,6 +319,45 @@
             .nav-links { transition: none; }
         }
 
+        @media (prefers-contrast: more) {
+            :root {
+                --border: #39424a;
+                --text-dim: #b7c0c8;
+                --accent-dim: rgba(74, 222, 128, 0.2);
+            }
+            body::after { display: none; }
+            .proj-card,
+            .tl-item,
+            .skill-cat {
+                border-color: #3a434c;
+            }
+            .proj-card p,
+            .tl-item p {
+                color: #d4d9de;
+            }
+        }
+
+        @media (forced-colors: active) {
+            * { forced-color-adjust: auto; }
+            body::after { display: none; }
+            .skip-link,
+            .hamburger,
+            .nav-links a,
+            .hero-links a,
+            .contact-links a {
+                border: 1px solid CanvasText;
+            }
+            .proj-card,
+            .tl-item,
+            .skill-cat,
+            nav,
+            .contact-section {
+                background: Canvas;
+                color: CanvasText;
+                border-color: CanvasText;
+            }
+        }
+
         @media print {
             nav { position: static; }
             .hero { padding-top: 40px; }
@@ -343,7 +382,7 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
         </ul>
-        <button class="hamburger" id="hamburger-btn" aria-label="Menü öffnen/schließen" aria-controls="nav-menu" aria-expanded="false" type="button">
+        <button class="hamburger" id="hamburger-btn" aria-label="Menü öffnen" aria-controls="nav-menu" aria-expanded="false" type="button">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -543,29 +582,68 @@
     (function() {
         'use strict';
 
+        var navLinks = Array.from(document.querySelectorAll('#nav-menu a[href^="#"]'));
+        var navSections = Array.from(document.querySelectorAll('main section[id], section#kontakt'));
+
+        function setActiveNav(id) {
+            navLinks.forEach(function(link) {
+                if (link.getAttribute('href') === '#' + id) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        }
+
         // ── Hamburger menu ──
         var btn = document.getElementById('hamburger-btn');
         var menu = document.getElementById('nav-menu');
         if (btn && menu) {
+            function syncMenuState(open) {
+                btn.setAttribute('aria-expanded', String(open));
+                btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+            }
+            syncMenuState(false);
             btn.addEventListener('click', function() {
                 var open = menu.classList.toggle('open');
-                btn.setAttribute('aria-expanded', open);
+                syncMenuState(open);
             });
             // Close on link click
             menu.querySelectorAll('a').forEach(function(a) {
                 a.addEventListener('click', function() {
                     menu.classList.remove('open');
-                    btn.setAttribute('aria-expanded', 'false');
+                    syncMenuState(false);
                 });
             });
             // Close on Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && menu.classList.contains('open')) {
                     menu.classList.remove('open');
-                    btn.setAttribute('aria-expanded', 'false');
+                    syncMenuState(false);
                     btn.focus();
                 }
             });
+        }
+
+        // ── Scroll spy / active nav item ──
+        if ('IntersectionObserver' in window && navSections.length) {
+            var activeObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        setActiveNav(entry.target.id);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '-35% 0px -55% 0px'
+            });
+            navSections.forEach(function(section) {
+                activeObserver.observe(section);
+            });
+        }
+
+        if (window.location.hash) {
+            setActiveNav(window.location.hash.slice(1));
         }
 
         // ── IntersectionObserver for fade-in (respects reduced motion) ──
@@ -582,12 +660,16 @@
                 observer.observe(el);
             });
         } else {
-            // Show everything immediately
             document.querySelectorAll('.fade').forEach(function(el) {
                 el.classList.add('visible');
             });
         }
+
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash) setActiveNav(window.location.hash.slice(1));
+        });
     })();
 </script>
 </body>
 </html>
+
