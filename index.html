@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOMINIK RAINER /// PORTFOLIO</title>
-    <meta name="description" content="Dominik Rainer — Portfolio">
+    <title>Dominik Rainer — Portfolio /// Full-Stack Developer</title>
+    <meta name="description" content="Dominik Rainer — SaaS-Plattformen, KI-Tools, Tourismus-Portale, Gaming-Communities und Poker-Engine. Full-Stack Developer aus Innsbruck.">
+    <meta name="theme-color" content="#050607">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -22,22 +23,48 @@
             --accent-dim: rgba(34,197,94,0.12);
             --accent-glow: rgba(34,197,94,0.06);
             --cyan: #2dd4bf;
+            --focus-ring: #4ade80;
         }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
+        /* Scanlines – pure decoration */
         body::after {
             content: '';
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; inset: 0;
             pointer-events: none; z-index: 9999;
             background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
         }
 
+        /* ── Skip to content ── */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 8px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: #050607;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            z-index: 10000;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 8px; }
+
+        /* ── Focus styles ── */
+        :focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        /* ── Navigation ── */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 100;
             background: rgba(5,6,7,0.94);
@@ -52,21 +79,45 @@
             font-size: 0.95rem; font-weight: 600;
             color: var(--accent-bright);
         }
-        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links {
+            display: flex; gap: 4px; list-style: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
         .nav-links a {
             font-family: 'IBM Plex Mono', monospace;
             color: var(--text-dim); text-decoration: none;
             font-size: 0.78rem; font-weight: 500;
-            padding: 6px 16px;
+            padding: 10px 16px;
             border: 1px solid transparent;
             transition: 0.15s;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            display: inline-block;
         }
         .nav-links a:hover { color: var(--text); border-color: var(--border); }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
-        .hamburger span { width: 22px; height: 2px; background: var(--text); }
+        .nav-links a[aria-current="page"] { color: var(--accent-bright); }
 
+        /* ── Hamburger ── */
+        .hamburger {
+            display: none;
+            flex-direction: column; justify-content: center; gap: 5px;
+            cursor: pointer;
+            padding: 10px 8px;
+            background: none; border: none;
+            min-width: 44px; min-height: 44px;
+            align-items: center;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--text);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ── Hero ── */
         .hero {
             padding: 160px 24px 80px;
             max-width: 1200px; margin: 0 auto;
@@ -79,6 +130,7 @@
             color: var(--accent-glow);
             position: absolute; top: 30px; right: 24px;
             line-height: 1; pointer-events: none; user-select: none;
+            aria-hidden: "true";
         }
         .hero-badge {
             font-family: 'IBM Plex Mono', monospace;
@@ -89,43 +141,47 @@
         }
         .hero h1 {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(2.8rem, 6.5vw, 5rem); font-weight: 700;
+            font-size: clamp(2.4rem, 6.5vw, 5rem); font-weight: 700;
             letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 28px;
         }
         .hero h1 .accent { color: var(--accent-bright); }
         .hero h1 .dim { color: var(--text-dim); }
         .hero p {
-            font-size: 1.05rem; color: var(--text-dim);
+            font-size: clamp(0.9rem, 1.2vw, 1.05rem); color: var(--text-dim);
             max-width: 550px; line-height: 1.9; margin-bottom: 36px; font-weight: 400;
         }
         .hero-links { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 52px; }
         .hero-links a {
             font-family: 'IBM Plex Mono', monospace;
             display: inline-flex; align-items: center; gap: 8px;
-            padding: 12px 24px; font-size: 0.78rem; font-weight: 600;
+            padding: 14px 24px; font-size: 0.78rem; font-weight: 600;
             text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em;
             border: 1px solid var(--border); color: var(--text-dim); transition: 0.15s;
+            min-height: 44px;
         }
         .hero-links a:hover { color: var(--text); border-color: var(--accent); background: var(--accent-dim); }
         .hero-links a.primary { background: var(--accent); color: #050607; border-color: var(--accent); font-weight: 700; }
         .hero-links a.primary:hover { background: var(--accent-bright); color: #050607; }
-        .hero-stats { display: flex; gap: 40px; padding: 28px 0 0; border-top: 1px solid var(--border); }
-        .stat-number { font-family: 'IBM Plex Mono', monospace; font-size: 2.2rem; font-weight: 700; color: var(--accent-bright); line-height: 1; }
+        .hero-stats { display: flex; gap: 40px; padding: 28px 0 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+        .stat-number { font-family: 'IBM Plex Mono', monospace; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--accent-bright); line-height: 1; }
         .stat-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; font-weight: 500; }
 
+        /* ── Sections ── */
         section { padding: 90px 24px; }
         .section-inner { max-width: 1200px; margin: 0 auto; }
         .section-header { margin-bottom: 52px; display: flex; align-items: center; gap: 20px; }
         .section-header .num {
             font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 600;
             color: var(--accent-bright); padding: 4px 12px; border: 1px solid var(--accent-dim);
+            flex-shrink: 0;
         }
         .section-header h2 {
-            font-family: 'IBM Plex Mono', monospace; font-size: 1.4rem; font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace; font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600;
             text-transform: uppercase; letter-spacing: 0.05em; color: var(--text);
         }
-        .section-header p { color: var(--text-dim); font-size: 0.9rem; max-width: 400px; margin-left: auto; text-align: right; font-weight: 400; }
+        .section-header p { color: var(--text-dim); font-size: 0.85rem; max-width: 400px; margin-left: auto; text-align: right; font-weight: 400; }
 
+        /* ── Project grid ── */
         .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .proj-card {
             padding: 32px; border: 1px solid var(--border);
@@ -143,7 +199,7 @@
         .proj-card:nth-child(8)::after { background: var(--cyan); }
         .proj-card:hover { border-color: #333; background: #181d22; }
         .proj-card .tag {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 600;
             color: var(--accent-bright); text-transform: uppercase;
             letter-spacing: 0.12em; margin-bottom: 10px;
         }
@@ -155,8 +211,8 @@
         .proj-card p { font-size: 0.85rem; color: #9aa3ae; line-height: 1.8; }
         .proj-card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
         .proj-card .tags span {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 500;
-            padding: 3px 10px; border: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500;
+            padding: 4px 10px; border: 1px solid var(--border);
             color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;
         }
         .proj-card a { 
@@ -164,8 +220,13 @@
             font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 500;
         }
         .proj-card a:hover { color: var(--accent-bright); }
-        .offline-flag { font-size: 0.58rem; color: #888; margin-left: 6px; letter-spacing: 0.1em; }
+        .proj-card a[target="_blank"]::after {
+            content: ' ↗';
+            font-size: 0.65rem;
+        }
+        .offline-flag { font-size: 0.68rem; color: #888; margin-left: 6px; letter-spacing: 0.1em; }
 
+        /* ── Timeline ── */
         .tl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; counter-reset: tl; }
         .tl-item {
             padding: 28px; border: 1px solid var(--border);
@@ -173,68 +234,134 @@
         }
         .tl-item::before {
             content: "0" counter(tl); font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.62rem; font-weight: 600; color: #555; display: block; margin-bottom: 10px;
+            font-size: 0.65rem; font-weight: 600; color: #555; display: block; margin-bottom: 10px;
         }
         .tl-item h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
         .tl-item .sub { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; margin-top: 2px; }
-        .tl-item .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--accent-bright); font-weight: 600; margin-bottom: 6px; }
+        .tl-item .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent-bright); font-weight: 600; margin-bottom: 6px; }
         .tl-item p { font-size: 0.85rem; color: #9aa3ae; line-height: 1.8; margin-top: 8px; }
 
+        /* ── Skills ── */
         .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-cat { padding: 24px 28px; border: 1px solid var(--border); flex: 1; min-width: 180px; background: var(--card); }
-        .skill-cat h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-bright); margin-bottom: 14px; }
+        .skill-cat { padding: 24px 28px; border: 1px solid var(--border); flex: 1; min-width: 200px; background: var(--card); }
+        .skill-cat h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-bright); margin-bottom: 14px; }
         .skill-cat .s { display: flex; flex-wrap: wrap; gap: 6px; }
-        .skill-cat .s span { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid var(--border); color: var(--text-dim); }
+        .skill-cat .s span { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; padding: 4px 10px; border: 1px solid var(--border); color: var(--text-dim); }
 
+        /* ── Contact ── */
         .contact-section { border-top: 1px solid var(--border); padding: 90px 24px; text-align: center; }
         .contact-section h2 { font-family: 'IBM Plex Mono', monospace; font-size: 1.4rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
         .contact-section p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 32px; }
         .contact-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .contact-links a { font-family: 'IBM Plex Mono', monospace; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 0.78rem; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); color: var(--text-dim); transition: 0.15s; }
+        .contact-links a { font-family: 'IBM Plex Mono', monospace; display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; font-size: 0.78rem; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); color: var(--text-dim); transition: 0.15s; min-height: 44px; }
         .contact-links a:hover { border-color: var(--accent); color: var(--text); background: var(--accent-dim); }
-        footer { text-align: center; padding: 28px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: #555; border-top: 1px solid var(--border); }
+
+        footer { text-align: center; padding: 28px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: #555; border-top: 1px solid var(--border); }
         footer a { color: var(--accent); text-decoration: none; }
+
+        /* ── Fade-in animation ── */
         .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
         .fade.visible { opacity: 1; transform: translateY(0); }
 
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 56px; left: 0; right: 0; background: rgba(5,6,7,0.98); flex-direction: column; padding: 24px; gap: 8px; transform: translateY(-120%); transition: 0.3s; border-bottom: 1px solid var(--border); }
-            .nav-links.open { transform: translateY(0); }
+            .nav-links {
+                position: fixed; top: 56px; left: 8px; right: 8px;
+                background: rgba(5,6,7,0.98);
+                flex-direction: column; padding: 16px; gap: 6px;
+                transform: translateY(-120%); opacity: 0;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                pointer-events: none;
+            }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-links a {
+                padding: 12px 16px;
+                width: 100%;
+            }
             .hamburger { display: flex; }
             .proj-grid { grid-template-columns: 1fr; }
             .tl { grid-template-columns: 1fr; }
             .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
             .section-header p { text-align: left; }
-            .hero-stats { gap: 28px; flex-wrap: wrap; }
+            .hero-stats { gap: 24px; }
             .hero::before { font-size: 5rem; top: 80px; }
+            section { padding: 60px 16px; }
+            .hero { padding: 120px 16px 60px; }
+            .hero-links a { width: 100%; justify-content: center; }
+            .contact-links a { width: 100%; justify-content: center; }
+            .skill-cat { min-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+            .hero { padding: 100px 12px 40px; }
+            section { padding: 40px 12px; }
+            .section-header { margin-bottom: 32px; }
+            .section-header h2 { font-size: 1rem; }
+            .proj-card { padding: 20px; }
+            .tl-item { padding: 20px; }
+            .skill-cat { padding: 20px; }
+            .hero-stats { gap: 16px; }
+            .stat-number { font-size: 1.4rem; }
+            .hero-links { flex-direction: column; }
+            .contact-section { padding: 60px 12px; }
+            .nav-inner { padding: 0 12px; }
+            .hero::before { font-size: 3.5rem; top: 70px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade { opacity: 1; transform: none; transition: none; }
+            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+            .nav-links { transition: none; }
+        }
+
+        @media print {
+            nav { position: static; }
+            .hero { padding-top: 40px; }
+            .hamburger { display: none; }
+            .nav-links { display: flex; }
+            body::after { display: none; }
+            .fade { opacity: 1; transform: none; transition: none; }
+            section { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+<nav aria-label="Hauptnavigation">
     <div class="nav-inner">
-        <span class="nav-logo">DR<span>//</span></span>
-        <ul class="nav-links" id="nl3">
+        <span class="nav-logo" aria-hidden="true">DR<span aria-hidden="true">//</span></span>
+        <ul class="nav-links" id="nav-menu" role="list">
             <li><a href="#projekte">Projekte</a></li>
             <li><a href="#werdegang">Werdegang</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
         </ul>
-        <div class="hamburger" onclick="document.getElementById('nl3').classList.toggle('open')">
-            <span></span><span></span><span></span>
-        </div>
+        <button class="hamburger" id="hamburger-btn" aria-label="Menü öffnen/schließen" aria-controls="nav-menu" aria-expanded="false" type="button">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
     </div>
 </nav>
 
-<section class="hero">
+<main id="main-content">
+
+<section class="hero" aria-label="Über mich">
     <div>
         <div class="hero-badge">Full-Stack Developer /// Innsbruck</div>
         <h1><span class="dim">Dominik</span><br><span class="accent">Rainer</span></h1>
-        <p>SaaS-Plattformen, KI-Tools, Live-Streaming, Tourismus-Portale, Gaming-Communities, Print und ein Poker-Bot der auf win2day lebt. Kein Bock auf langweiligen Standard.</p>
+        <p>SaaS-Plattformen, KI-Tools, Live-Streaming, Tourismus-Portale, Gaming-Communities und eine Poker-Engine. Kein Bock auf langweiligen Standard.</p>
         <div class="hero-links">
             <a href="mailto:rainer@dominik.in" class="primary">✉ Kontakt</a>
-            <a href="https://github.com/Loggableim" target="_blank">$ github</a>
+            <a href="https://github.com/Loggableim" target="_blank" rel="noopener noreferrer">$ github</a>
             <a href="#projekte">↓ Projekte</a>
         </div>
         <div class="hero-stats">
@@ -246,130 +373,130 @@
     </div>
 </section>
 
-<section id="projekte">
+<section id="projekte" aria-label="Projekte">
     <div class="section-inner">
         <div class="section-header fade">
-            <span class="num">01</span>
+            <span class="num" aria-hidden="true">01</span>
             <h2>Projekte</h2>
             <p>Gebaut mit Node.js, Python, Jekyll, Astro & jeder Menge Kaffee</p>
         </div>
         <div class="proj-grid">
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag">SAAS</div>
                 <h3>WordStructor</h3>
                 <div class="meta">4 Brands · Multi-Brand Buchgenerierung</div>
                 <p>Python/Flet Desktop-App mit 4 White-Label-Produkten. Dodo Payments, HWID-Lizenzsystem, 14-Tage-Trial, 30-Tage-Offline-Cache. Lokale & Cloud-KI (OpenAI, Ollama, DeepSeek). PyInstaller-Build-Pipeline. Resend E-Mail-Automation.</p>
-                <div class="tags"><span>Python</span><span>Flet</span><span>LLM</span><span>Dodo</span><span>Licenses</span></div>
-                <a href="https://wordstructor.com">wordstructor.com →</a>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Python</span><span>Flet</span><span>LLM</span><span>Dodo</span><span>Licenses</span></div>
+                <a href="https://wordstructor.com" target="_blank" rel="noopener noreferrer">wordstructor.com</a>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag t-cyan">TOOL</div>
                 <h3>LTTH.app</h3>
                 <div class="meta">TikTok LIVE Streaming Tool</div>
                 <p>37 Plugins, OBS-Overlays, Dashboard, Go-Launcher. 2.391 Unit-Tests. Socket.IO-Echtzeit-Architektur mit Eulerstream WebSocket SDK. OpenAI GPT-Integration mit Vector Memory. TikTok-Interaktion via Spenden-Events, Chat-Commands & Minigames.</p>
-                <div class="tags"><span>Node.js</span><span>Socket.IO</span><span>TikTok</span></div>
-                <a href="https://ltth.app">ltth.app →</a>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Node.js</span><span>Socket.IO</span><span>TikTok</span></div>
+                <a href="https://ltth.app" target="_blank" rel="noopener noreferrer">ltth.app</a>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag">WEB</div>
                 <h3>TIROL Tourismus</h3>
                 <div class="meta">4 Sprachen · Cloudflare Pages</div>
                 <p>Astro 5 SSG mit 10.000+ generierten Seiten. DE/FR/IT/EN. Newsletter-Integration (MailerLite), interaktive Karten (OpenStreetMap/Leaflet), Premium-Gating mit D1-Database, Auth-Functions, Cookie-basierte Sessions. Übersetzungen via Multi-Agent-System.</p>
-                <div class="tags"><span>Astro</span><span>Cloudflare</span><span>i18n</span></div>
-                <a href="https://tiroltourismus.com">tiroltourismus.com →</a>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Astro</span><span>Cloudflare</span><span>i18n</span></div>
+                <a href="https://tiroltourismus.com" target="_blank" rel="noopener noreferrer">tiroltourismus.com</a>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag t-cyan">POKER</div>
                 <h3>Poker GTO Engine</h3>
                 <div class="meta">Counterfactual Regret Minimization · ICM · Nash</div>
                 <p>CFR-Solver mit vorberechneten Postflop-Spots. Nash-Push/Fold-Tabellen (6-max & 3-handed). ICM-Rechner mit $EV-Berechnung. MDF-Bet-Sizing (7 Board-Klassen, SPR-Bänder). Mixed-Strategy mittels deterministischer Coin-Flips. Multi-Tisch-Architektur. 243 Tests.</p>
-                <div class="tags"><span>Python</span><span>CFR</span><span>ICM</span><span>Nash</span></div>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Python</span><span>CFR</span><span>ICM</span><span>Nash</span></div>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag t-cyan">COMMUNITY</div>
                 <h3>PAWS UNITED</h3>
                 <div class="meta">Furry Gaming Community</div>
                 <p>Gaming-Community mit eigenen Servern (ARK, Minecraft Bedrock & Java, C&C Red Alert, GTA V). Discord mit Creator-Support & Events. Jekyll-Website auf GitHub Pages unter pawsunited.info. Fokus auf Furry-Kultur, Inklusion & Community-Building.</p>
-                <div class="tags"><span>Jekyll</span><span>GitHub Pages</span><span>Discord</span></div>
-                <a href="https://pawsunited.info">pawsunited.info →</a>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Jekyll</span><span>GitHub Pages</span><span>Discord</span></div>
+                <a href="https://pawsunited.info" target="_blank" rel="noopener noreferrer">pawsunited.info</a>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag t-orange">TRAVEL</div>
                 <h3>Republic of Nauru</h3>
                 <div class="meta">republicofnauru.com</div>
                 <p>Astro-Informationsseite über die Republik Nauru — die kleinste Republik der Welt (21 km²). Travel Guide mit Culture, Economy, Visa, Weather, Accommodation, History. Statisch generiert, JSON-getrieben.</p>
-                <div class="tags"><span>Astro</span><span>Static</span><span>Travel</span></div>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>Astro</span><span>Static</span><span>Travel</span></div>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag">SHOP</div>
                 <h3>AquaristikZentrum <span class="offline-flag">[OFFLINE]</span></h3>
                 <div class="meta">E-Commerce · Full-Stack</div>
                 <p>Führender Aquaristik-Onlineshop im DACH-Raum. Shop-Entwicklung, Performance-Optimierung, Facebook-Seiten-Admin. Domain inzwischen nicht mehr aufgelöst.</p>
-                <div class="tags"><span>E-Commerce</span><span>Full-Stack</span></div>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>E-Commerce</span><span>Full-Stack</span></div>
+            </article>
 
-            <div class="proj-card fade">
+            <article class="proj-card fade">
                 <div class="tag t-cyan">PRINT</div>
                 <h3>Pixel Project</h3>
                 <div class="meta">Nyala SwissQprint · Digitaldruck</div>
                 <p>Professioneller Digitaldruck. Bedienung & Einrichtung einer Nyala SwissQprint (Großformatdrucker). Farbmanagement, Materialkunde, Produktions-Workflow.</p>
-                <div class="tags"><span>SwissQprint</span><span>Druck</span></div>
-            </div>
+                <div class="tags" aria-label="Technologien"><span>SwissQprint</span><span>Druck</span></div>
+            </article>
 
         </div>
     </div>
 </section>
 
-<section id="werdegang">
+<section id="werdegang" aria-label="Werdegang">
     <div class="section-inner">
         <div class="section-header fade">
-            <span class="num">02</span>
+            <span class="num" aria-hidden="true">02</span>
             <h2>Werdegang</h2>
             <p>Vom Koch zum Developer — jeder Umweg war wichtig</p>
         </div>
-        <div class="tl">
-            <div class="tl-item fade">
+        <div class="tl" role="list">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">~2012</div>
                 <h3>Koch-Ausbildung</h3>
                 <p>Erste berufliche Station. Grundlagen in Küche, Organisation, Disziplin.</p>
             </div>
-            <div class="tl-item fade">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">~2014</div>
                 <h3>Medienfachmann</h3>
                 <p>Einstieg in Web & digitale Medien. Erste Berührung mit Code.</p>
             </div>
-            <div class="tl-item fade">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">2014–2017</div>
                 <h3>Freelance & erste Webprojekte</h3>
                 <div class="sub">Freelancer.com, Fiverr, Crypto</div>
                 <p>Bitcoin, Dogecoin-Wallets, erste PHP/HTML-Seiten. Experimente mit WordPress-Plugins.</p>
             </div>
-            <div class="tl-item fade">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">2017–2021</div>
                 <h3>Web-Dev & Facebook-Apps</h3>
                 <div class="sub">Kappalounge, neunGAG, Minecraft</div>
                 <p>Facebook-App-Entwicklung, Node.js, Python. Eigene Minecraft-Server-Community.</p>
             </div>
-            <div class="tl-item fade">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">2021–2022</div>
                 <h3>Pixel Project</h3>
                 <div class="sub">SwissQprint · Digitaldruck</div>
                 <p>Großformat-Druckproduktion. Nyala SwissQprint Bedienung, Farbmanagement.</p>
             </div>
-            <div class="tl-item fade">
+            <div class="tl-item fade" role="listitem">
                 <div class="tl-date">2022–2024</div>
                 <h3>AquaristikZentrum</h3>
                 <div class="sub">Full-Stack Webdev · E-Commerce</div>
                 <p>Full-Stack-Entwicklung für einen der größten Aquaristik-Shops im DACH-Raum. Mittlerweile offline.</p>
             </div>
-            <div class="tl-item fade" style="grid-column:1/-1">
+            <div class="tl-item fade" role="listitem" style="grid-column:1/-1">
                 <div class="tl-date">2024–heute</div>
                 <h3>Solo-Gründer & Product Owner</h3>
                 <div class="sub">WordStructor · LTTH · TIROL Tourismus · Poker Bot · PawsUnited · Nauru · Pixel Project</div>
@@ -379,10 +506,10 @@
     </div>
 </section>
 
-<section id="skills">
+<section id="skills" aria-label="Skills">
     <div class="section-inner">
         <div class="section-header fade">
-            <span class="num">03</span>
+            <span class="num" aria-hidden="true">03</span>
             <h2>Skills</h2>
             <p>Tech-Stack aus &gt;10 Jahren Production</p>
         </div>
@@ -397,13 +524,15 @@
     </div>
 </section>
 
-<section class="contact-section" id="kontakt">
+</main>
+
+<section class="contact-section" id="kontakt" aria-label="Kontakt">
     <h2 class="fade">Kontakt</h2>
     <p class="fade">Mail, Web oder GitHub — alles außer LinkedIn.</p>
     <div class="contact-links fade">
         <a href="mailto:rainer@dominik.in">✉ rainer@dominik.in</a>
-        <a href="https://rainer.dominik.in" target="_blank">🌐 rainer.dominik.in</a>
-        <a href="https://github.com/Loggableim" target="_blank">🐙 GitHub</a>
+        <a href="https://rainer.dominik.in" target="_blank" rel="noopener noreferrer">🌐 rainer.dominik.in</a>
+        <a href="https://github.com/Loggableim" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
     </div>
 </section>
 
@@ -412,9 +541,54 @@
 </footer>
 
 <script>
-    document.querySelectorAll('#nl3 a').forEach(a => a.addEventListener('click', () => document.getElementById('nl3').classList.remove('open')));
-    const o = new IntersectionObserver(e => { e.forEach(i => { if(i.isIntersecting) i.target.classList.add('visible') }) }, { threshold: 0.1 });
-    document.querySelectorAll('.fade').forEach(el => o.observe(el));
+    (function() {
+        'use strict';
+
+        // ── Hamburger menu ──
+        var btn = document.getElementById('hamburger-btn');
+        var menu = document.getElementById('nav-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', function() {
+                var open = menu.classList.toggle('open');
+                btn.setAttribute('aria-expanded', open);
+            });
+            // Close on link click
+            menu.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    menu.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            });
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.focus();
+                }
+            });
+        }
+
+        // ── IntersectionObserver for fade-in (respects reduced motion) ──
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReduced) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade').forEach(function(el) {
+                observer.observe(el);
+            });
+        } else {
+            // Show everything immediately
+            document.querySelectorAll('.fade').forEach(function(el) {
+                el.classList.add('visible');
+            });
+        }
+    })();
 </script>
 </body>
 </html>
